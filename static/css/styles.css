@@ -1,0 +1,440 @@
+body {
+	margin:0;
+	font-family:"Open Sans",Arial,sans-serif;
+	background:#b6b2b2;
+	color:#1179b8;
+}
+header{
+	width:100%;
+  background: #3873a8;
+	padding-right: 60px;
+}
+footer {
+	width:100%;
+	text-align:center;
+	padding:30px;
+	margin-top:20px;
+	display:block;
+  background: #3873a8;
+	color: #fff;
+	position: fixed;
+	bottom: 0;
+}
+a {
+	text-decoration: none;
+}
+#message {
+	margin: 0 auto;
+	background: #FFBABA;
+	color: #D8000C;
+	width: 29%;
+	border-radius: 8px;
+	margin-top: 20px;
+	padding-bottom: 0px;
+
+}
+#message span {
+	color: #D8000C;
+
+}
+#message button {
+	background:#FFBABA;
+	border: none;
+}
+/*aligns the title of the website*/
+.logo {
+	padding: 20px 20px;
+	font-size: 30px;
+	display:inline-block;
+}
+.logo a, .logo span {
+	font-size:40px;
+	font-weight:600;
+	color:#ffffff;
+}
+/*aligns the subtitle and the info icon*/
+.top {
+	display: inline-block;
+}
+/*popup container*/
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+	float: right;
+	bottom: 47px;
+	left: 40px;
+}
+
+/*the popup content*/
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #f2f2f1;
+  color: #000;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  margin-left: -80px;
+	border: 3px #000;
+	top: 100%;
+}
+
+/*the popup arrow pointing up to the info icon after clicked*/
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #555 transparent;
+}
+
+/*a toggle class that shows/hides the popup*/
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+/*manages the hyperlinks in the header of the page*/
+.menu {
+	float: right;
+	padding: 55px 50px;
+	font-size: 20px;
+}
+/*changes color of the hyperlink when its page is loaded*/
+.menu a {color:#c0c0c0; padding: 0 15px}
+/*when user hovers over hyperlink, the color changes to a light gray*/
+.menu a:hover {color:#dbdbdd;}
+.logout {
+	background: #b6b2b2;
+	border: none;
+	float: left;
+	cursor: pointer;
+}
+/*main content on page*/
+#page {
+	min-height: 600px;
+}
+#codes .menu .codes , #students .menu .students, #books .menu .books {
+	color: #919191;
+}
+#page h1 {
+	font-size:30px;
+	font-weight:bold;
+	color:#1179b8;
+	text-align:center;
+	display:block;
+}
+#page h3 {
+	font-size:16px;
+	color:#1179b8;
+	text-align:center;
+	display:block;
+	text-transform:uppercase;
+	font-weight:normal;
+}
+/*holds the content in the body of the page*/
+.container {
+	overflow: hidden;
+	width:90%;
+	margin:0 auto;
+	text-align: center;
+}
+/*disables border on X button for error messages*/
+#page .dismiss, #page .dismiss:focus {
+	border-width: 0px;
+}
+::placeholder {
+	color: #fff;
+}
+::-ms-input-placeholder {
+	color: #fff;
+}
+#search, #add-book {
+	display:block;
+	width:90%;
+	margin:0 auto;
+	text-align:center;
+}
+/*styles the input boxes and buttons above the table*/
+#search div, #add-book div, #add-record div {
+	padding-right: 0px;
+	display:inline-block;
+	text-transform:uppercase;
+	padding:0 20px 10px 0;
+}
+#gradelevel {
+	margin-right:20px;
+}
+input, button, select {
+	background:#b6b2b2 ;
+	color:#ffffff;
+	border-radius:4px;
+	padding:10px;
+}
+select {
+	font-size: 15px;
+  background-color: #ccc;
+}
+button {
+		margin-left:5px;
+		text-transform:uppercase;
+}
+input {
+  background: #ccc;
+}
+/*aligns the buttons on redemption codes page because they behave differently from the other pages */
+.redemp{
+	position:relative;
+	left: 80px;
+}
+button.add {
+	background:green;
+}
+button.update {
+	background:blue;
+}
+button.remove{
+	background:red;
+	margin-left:30px;
+}
+button.report{
+	float:right;
+	margin-left:30px;
+	background: grey;
+}
+/*colors the text in the error message*/
+.dismiss span, .notice {
+	color:#000000;
+	font-size:24px;
+	font-weight:bold;
+	text-transform:uppercase;
+	border: none;
+}
+#flash {
+	width: 38%;
+	margin: 0 auto;
+}
+#flash button {
+	border: none;
+	background: #b6b2b2;
+
+}
+/*styles table*/
+#results {
+	height:400px;
+	overflow:scroll;
+	overflow-y:scroll;
+	overflow-x:hidden;
+	border:1px solid #cccccc;
+	display:block;
+	width:90%;
+	margin: 0 auto;
+	text-align: center;
+}
+#records {
+	border:none;
+	width:100%;
+	text-align:left;
+}
+#records th, #records td {
+	padding:5px 10px;
+}
+#records th {
+	pointer-events:none;
+	width:30%;
+	padding:5px 10px;
+	text-transform:uppercase;
+}
+#records tr:hover td {
+	background-color:#666666;
+	color: #fff !important;
+	cursor:pointer;
+}
+#records td {
+	border:1px solid #eeeeee;
+	color:#666;
+}
+#row_id {
+	display: none;
+}
+#page h1 {
+	font-size: 24px;
+}
+.menu a {
+	font-size: 18px;
+}
+/*aligns content on login page*/
+#username, #password, #signin {
+	display: inline-block;
+	width:93%;
+
+}
+#controls {
+    width: 90%;
+    text-align: center;
+}
+.log_header {
+	background: #ccc;
+}
+.log_footer {
+	background: #ccc !important;
+}
+.form {
+	background: #ccc;
+}
+/*styles the content in login page as well as adds a shadow to the <div>*/
+.login {
+  display:block;
+	background: #b6b2b2;
+	color: #fff;
+	width: 30%;
+	margin: 0 auto;
+	margin-top: 10%;
+	padding: 20px 20px 40px;
+	-webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,1);
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,1);
+}
+.login div {
+	display:block;
+	margin:0 auto;
+	padding:20px;
+}
+.login label, .login input {
+	display:inline-block;
+}
+.login input {
+	border:2px solid #555;
+	padding:15px;
+	border-radius:3px;
+	color:#555 !important;
+	font-size:20px;
+}
+.login h1 {
+	color: #555;
+	text-align:center;
+}
+.login p {
+	width: 41%;
+	margin: 1;
+}
+#login-page #log_footer {
+	display:none;
+}
+#signin {
+	display:block;
+	font-size: 20px;
+	padding: 20px;
+	margin-left:0 !important;
+	width:100%;
+	cursor: pointer;
+}
+/*changes color of login button when user hovers over*/
+#signin:hover {background-color:#555; border-color:#555;}
+/*from here down adjusts content on page to make website friendly with most resolutions*/
+@media screen and (max-width:1780px) {
+	#message span {
+		font-size: 20px;
+	}
+}
+@media screen and (max-width:1500px) {
+	.menu {
+		font-size: 20px;
+	}
+	#message span {
+		font-size: 18px;
+	}
+}
+@media screen and (max-width:1349px) {
+	header div {
+		display:block;
+		width:100%;
+		text-align:center;
+	}
+	header .menu {
+		float:none;
+		padding:0;
+	}
+	#message span{
+		width: 30%;
+		font-size: 16px;
+		}
+	}
+@media screen and (max-width:1220px) {
+	#message span {
+		font-size: 14px;
+	}
+}
+@media screen and (max-width:1100px) {
+	#message span {
+		font-size:12px;
+	}
+}
+@media screen and (max-width:900px) {
+	.logo a, .logo span {
+		font-size: 30px;
+	}
+	.redemp{
+		left: 50px;
+	}
+}
+@media screen and (max-width:680px) {
+	.menu a {
+	font-size: 16px !important;
+}
+	.logout {
+		top: 8em;
+		left: 2em;
+		position:absolute;
+	}
+	header {
+		padding-bottom: 50px;
+	}
+	.redemp{
+		left: 30px;
+	}
+}
+@media screen and (max-width:570px) {
+	#gradelevel {
+		margin-right: 145px;
+	}
+	.redemp{
+		left: 0px;
+	}
+}
+@media screen and (max-width:500px) {
+	.logout {
+		top: 9.5em;
+	}
+}
+@media screen and (max-width:460px) {
+	#search div, #add-book div, #add-record div {
+			padding-right: 160px;
+}
+	.popup {
+		float: none;
+		bottom: 0px;
+		left:0px;
+	}
+
+}
+@media screen and (max-width:370px) {
+	.logout {
+		top: 12em;
+	}
+}
+@media screen and (max-width:350px) {
+	.logout {
+		top: 14em;
+	}
+}

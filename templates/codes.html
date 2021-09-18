@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <!-- calling stylesheet through the server -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}"></link>
+      <!-- calling the javascript files jquery and bootstrap -->
+      <script type="text/javascript" src="{{ url_for('static', filename='javascript/jquery-3.3.1.js') }}"></script>
+      <script type="text/javascript" src="{{ url_for('static', filename='javascript/bootstrap.min.js') }}"></script>
+      <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}">
+      <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}">
+      <link rel="manifest" href="/site.webmanifest">
+      <link rel="mask-icon" href="{{ url_for('static', filename='/favicon//safari-pinned-tab.svg') }}" color="#5bbad5">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+      <title>Manage E-Books</title>
+      <meta charset="windows-1252">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body id="codes">
+      <header>
+        <div class="logo">
+          <span><a href="{{ url_for('home') }}">FBLA WEBSITE PROJECT</a></span>
+          <form method="POST"><button class="logout" type="submit" formaction="/logout">LOG OUT</button></form>
+        </div>
+        <div class="menu">
+          <!-- calling all values listed in the databse under these specific columns from the ebook redemptioncodes table -->
+          <a href="{{ url_for('students') }}" class="students">MANAGE STUDENTS</a>
+          <a href="{{ url_for('books') }}" class="books">MANAGE BOOKS</a>
+          <a href="{{ url_for('codes') }}" class="codes">REDEMPTION CODES</a>
+          <a href="{{ url_for('report') }}" class="report">REPORT</a>
+        </div>
+      </header>
+      <section id="page">
+      <div class="container">
+        <div class="top">
+          <h1>MANAGE E-BOOKS</h1>
+          <span class="popup" onclick="toggle()"> &#9432;
+            <span class="popuptext" id="infoPopUp">You can add/update/remove any row. A redemption code can only be paired to one student at a time. The title of the book will show up next to its Book-ID in the table.</span>
+          </span>
+        </div>
+        <h3>To update a student record, first click on the row</h3>
+          <!--  Code for html to use template.html for reference from flash message in application python file -->
+          {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                  {% for message in messages %}
+                      <div class="alert alert-warning alert dismissable" role="alert">
+                      <button type="button" class="dismiss" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                        <span class="notice">{{message}}</span>
+                      </div>
+                  {% endfor %}
+              {% endif %}
+          {% endwith %}
+        <div id="add-record">
+          <form method='POST'>
+            <!-- input fields for the students form -->
+            <div>Redemption Code <input placeholder="0000000" type="number" name="redemptioncode" id="redemptioncode" required="True"></div>
+            <div>Ebook-ID <input placeholder="00x000" title="00x000" pattern="[0-9]{2}[x][0-9]{3}" name="ebook_id" id="ebook_id" required="True"></div>
+            <div>Student-ID <input placeholder="Student ID" type="number" name="student_id" id="student_id"></div>
+            <div><input type="number" name="row_id" id="row_id" style="visibility: hidden" /></div>
+            <div class="redemp" style="display: flex;">
+              <!-- add update and remove buttons that access application python file and executes the formaction -->
+              <button formaction="/post_red" type="submit" class="add">Add</button>
+              <button type="submit" formaction="/upd_red" class="update">Update</button>
+              <button type="submit" formaction="/rem_red" class="remove">Remove</button>
+            </div>
+          </form>
+        </div>
+        <div class="output" id="results">
+          <table id="records">
+            <thead>
+              <th>Redeption Code</th>
+              <th>Ebook-ID</th>
+				      <th>Ebook Name</th>
+              <th>Student-ID</th>
+            </thead>
+            <!-- Calling template again for reference for calling rows from sqlite database-->
+            {% for row in rows %}
+              <form method="POST">
+                <tr>
+                  <!-- Calling each value listed under said columns from database and organizing them into -->
+			             <td>{{row["redemptioncode"]}}</td>
+                   <td>{{row["ebook_id"]}}</td>
+			             <td>{{row["ebooktitle"]}}</td>
+                   <td>{{row["student_id"]}}</td>
+			             <td style="display:none;">{{row["row_id"]}}</td>
+                </tr>
+              </form>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div>
+      &copy;FBLA Buckingham County High School&nbsp;     | &nbsp;Designed &amp; Built by Cole Bohanon
+      </div>
+    </footer>
+    <script>
+      function toggle() {
+        var popup = document.getElementById("infoPopUp");
+        popup.classList.toggle("show");
+      }
+      var rIndex,
+          table = document.getElementById("records");
+
+      //function for when the user clicks on a row it will copy the selected data into the input fields
+      function selectedRowToInput()
+      {
+
+          for (var i = 0, row; row = table.rows[i]; i++)
+          {
+              table.rows[i].onclick = function()
+              {
+                //gets the data from the form with the corresponding ID tag
+                rIndex = this.rowIndex;
+                document.getElementById("redemptioncode").value = this.cells[0].innerHTML;
+                document.getElementById("ebook_id").value = this.cells[1].innerHTML;
+                document.getElementById("student_id").value = this.cells[3].innerHTML;
+                document.getElementById("row_id").value = this.cells[4].innerHTML;
+              };
+          }
+      }
+      selectedRowToInput();
+    </script>
+  </body>
+</html>
